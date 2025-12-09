@@ -8,17 +8,64 @@ import {
   FiMinus,
   FiPlus,
   FiArrowRight,
+  FiSearch,
+  FiShoppingBag,
+  FiGrid,
+  FiDroplet,
+  FiSmile,
+  FiActivity,
+  FiShield,
 } from "react-icons/fi";
 
 import HairSpaImg from "../assets/products/hair-spa.png";
 import HerbalShampooImg from "../assets/products/herbal-shampoo.png";
 import NariMaltImg from "../assets/products/nari-malt.png";
+import storeBg from "../assets/store-bg.png";
 
 // ----------------- DATA -----------------
+
+const CATEGORIES = [
+  {
+    id: "All",
+    label: "All",
+    icon: <FiGrid className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "Hair",
+    label: "Hair",
+    icon: <FiDroplet className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "Skin",
+    label: "Skin",
+    icon: <FiSmile className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "Digestion",
+    label: "Digestion",
+    icon: <FiActivity className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "Bones",
+    label: "Bones",
+    icon: <FiActivity className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "Immunity",
+    label: "Immunity",
+    icon: <FiShield className="w-6 h-6 text-[#3A643B]" />,
+  },
+  {
+    id: "More",
+    label: "More",
+    icon: <FiChevronRight className="w-6 h-6 text-[#3A643B]" />,
+  },
+];
 
 const PRODUCT_DETAILS = {
   1: {
     id: 1,
+    category: "Hair",
     title: "Amrutam Kuntal care Hair Spa | Do- it Yourself Hair Treatment",
     price: "₹ 649",
     rating: 5,
@@ -34,6 +81,7 @@ const PRODUCT_DETAILS = {
   },
   2: {
     id: 2,
+    category: "Hair",
     title:
       "Amrutam Kuntal Care Herbal Shampoo | Healthy, Natural and Dynamic Hair",
     price: "₹ 649",
@@ -48,6 +96,7 @@ const PRODUCT_DETAILS = {
   },
   3: {
     id: 3,
+    category: "Immunity",
     title:
       "Amrutam Nari Sondarya Malt | Complete Care For Women's Health And Beauty",
     price: "₹ 649",
@@ -126,7 +175,6 @@ const EXPERTS = [
   },
 ];
 
-
 const PRODUCT_HIGHLIGHTS = [
   "Helps with Dry, Frizzy Hair",
   "Relaxes the scalp, improves hair health",
@@ -201,7 +249,7 @@ const ALSO_BOUGHT = [
   },
 ];
 
-// ----------------- COMPONENT -----------------
+// ----------------- EXPERTS SECTION -----------------
 function ExpertsSection() {
   const [startIndex, setStartIndex] = useState(0);
   const perView = 3;
@@ -228,14 +276,12 @@ function ExpertsSection() {
   };
 
   return (
-    <section className="bg-[#FFF7E2] py-16">
+    <section className="bg-[#FFFFFF] py-16">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Heading */}
         <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#222222] mb-10">
           Meet our Experts
         </h2>
 
-        {/* Carousel */}
         <div className="relative flex items-center">
           {/* Left arrow */}
           <button
@@ -253,7 +299,6 @@ function ExpertsSection() {
                 key={doc.id}
                 className="rounded-[32px] bg-[#FFF6E2] shadow-[0_12px_30px_rgba(0,0,0,0.06)] flex flex-col items-center pt-10 pb-6 px-6"
               >
-                {/* Avatar + rating badge */}
                 <div className="relative mb-6">
                   <img
                     src={doc.image}
@@ -266,7 +311,6 @@ function ExpertsSection() {
                   </div>
                 </div>
 
-                {/* Name + title */}
                 <h3 className="mt-3 text-lg font-semibold text-[#222222] text-center">
                   {doc.name}
                 </h3>
@@ -274,13 +318,11 @@ function ExpertsSection() {
                   {doc.title}
                 </p>
 
-                {/* Experience */}
                 <p className="mt-3 text-sm text-[#333333] flex items-center gap-2">
                   <span className="text-lg">🎓</span>
                   <span>{doc.experience}</span>
                 </p>
 
-                {/* Specialty pill */}
                 <div className="mt-3">
                   <span className="inline-flex items-center gap-1 rounded-full bg-[#EAF3E6] border border-[#C5D7C4] px-4 py-1.5 text-xs font-medium text-[#275A3A]">
                     <span>🔗</span>
@@ -288,7 +330,6 @@ function ExpertsSection() {
                   </span>
                 </div>
 
-                {/* Book button */}
                 <button
                   type="button"
                   className="mt-8 w-full rounded-b-[32px] rounded-t-[0] bg-[#275A3A] text-white text-sm font-semibold py-4 -mx-6 px-6"
@@ -323,7 +364,7 @@ function ExpertsSection() {
           ))}
         </div>
 
-        {/* Find more experts button */}
+        {/* Find more experts */}
         <div className="mt-8 flex justify-center">
           <button
             type="button"
@@ -338,7 +379,7 @@ function ExpertsSection() {
   );
 }
 
-
+// ----------------- MAIN PAGE -----------------
 export default function ProductDetailPage() {
   const { id } = useParams();
   const product = PRODUCT_DETAILS[id] || PRODUCT_DETAILS[1];
@@ -346,6 +387,9 @@ export default function ProductDetailPage() {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [qty, setQty] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(
+    product.category || "All"
+  );
 
   const activeImage = product.thumbnails[activeIndex];
 
@@ -362,10 +406,79 @@ export default function ProductDetailPage() {
 
   return (
     <div className="bg-[#FFF7E2] min-h-screen">
-      {/* MAIN PRODUCT HERO SECTION */}
-      <section className="max-w-6xl mx-auto px-4 pt-10 lg:pt-14 pb-12 lg:pb-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-start">
-          {/* LEFT: big image + thumbnails */}
+      {/* ========== STORE HERO + CATEGORY BAR (same as shop) ========== */}
+      <section
+        className="relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${storeBg})` }}
+      >
+        <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14 lg:py-16">
+          <h1 className="text-center text-3xl sm:text-4xl font-semibold text-[#2F3443] mb-8">
+            Store
+          </h1>
+
+          {/* Search + bag */}
+          <div className="flex items-center justify-center gap-4">
+            <div className="flex-1 max-w-3xl">
+              <div className="flex items-center gap-3 bg-white rounded-[14px] shadow-md px-4 sm:px-6 py-4">
+                <FiSearch className="text-xl text-[#757575]" />
+                <input
+                  type="text"
+                  placeholder="Search for Kuntal Care"
+                  className="font-nunito flex-1 bg-transparent border-none outline-none text-[16px] sm:text-base text-[#222222] placeholder:text-[#8E8E8E]"
+                />
+              </div>
+            </div>
+
+            <button className="hidden sm:flex items-center justify-center w-11 h-11 rounded-[14px] bg-white shadow-md border border-[#F2F2F2]">
+              <FiShoppingBag className="text-xl text-[#222222]" />
+            </button>
+          </div>
+
+          {/* Bag icon mobile */}
+          <div className="mt-4 flex justify-center sm:hidden">
+            <button className="flex items-center justify-center w-11 h-11 rounded-[14px] bg-white shadow-md border border-[#F2F2F2]">
+              <FiShoppingBag className="text-xl text-[#222222]" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORY FILTER BAR (only visual, no filtering here) */}
+      <section className="bg-[#FFF7E2]">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-center gap-6 overflow-x-auto pb-2">
+            {CATEGORIES.map((cat) => {
+              const isActive = cat.id === selectedCategory;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className="flex flex-col items-center gap-2 min-w-[72px]"
+                >
+                  <div
+                    className={`flex items-center justify-center rounded-full border-4 ${
+                      isActive ? "border-[#3A643B]" : "border-white"
+                    } bg-white p-1`}
+                  >
+                    <div className="w-14 h-14 rounded-full bg-[#E3EFE6] flex items-center justify-center">
+                      {cat.icon}
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium text-[#222222]">
+                    {cat.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== MAIN PRODUCT HERO SECTION (2 columns on desktop) ========== */}
+      <section className="max-w-6xl mx-auto px-4 pt-6 lg:pt-10 pb-12 lg:pb-16">
+        <div className="grid gap-10 lg:grid-cols-2 items-start">
+          {/* LEFT: images */}
           <div>
             <div className="relative rounded-[32px] overflow-hidden bg-white">
               <img
@@ -373,8 +486,6 @@ export default function ProductDetailPage() {
                 alt={product.title}
                 className="w-full h-[420px] md:h-[460px] object-cover"
               />
-
-              {/* right arrow overlay */}
               <button
                 type="button"
                 onClick={handleNextImage}
@@ -384,7 +495,6 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            {/* thumbnails (1 row, middle of page) */}
             <div className="mt-5 flex gap-4">
               {product.thumbnails.map((thumb, idx) => (
                 <button
@@ -407,13 +517,12 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* RIGHT: product info */}
+          {/* RIGHT: info */}
           <div className="space-y-5 lg:pt-6">
             <h1 className="text-2xl md:text-3xl font-semibold text-[#2F3A3C] leading-snug">
               {product.title}
             </h1>
 
-            {/* rating + reviews */}
             <div className="flex items-center gap-2 text-sm">
               <div className="flex items-center text-[#F5A623]">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -426,17 +535,13 @@ export default function ProductDetailPage() {
               <span className="text-[#333] font-medium">
                 {product.rating.toFixed(1)}
               </span>
-              <span className="text-[#777]">
-                ({product.reviews} reviews)
-              </span>
+              <span className="text-[#777]">({product.reviews} reviews)</span>
             </div>
 
-            {/* price */}
             <p className="text-xl font-semibold text-[#2F3A3C]">
               {product.price}
             </p>
 
-            {/* size selector */}
             <div className="flex flex-wrap gap-3">
               {product.sizes.map((size) => (
                 <button
@@ -454,9 +559,7 @@ export default function ProductDetailPage() {
               ))}
             </div>
 
-            {/* qty + add to cart */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              {/* quantity stepper */}
               <div className="flex items-center border border-[#E0E0E0] rounded-full overflow-hidden bg-white">
                 <button
                   type="button"
@@ -477,7 +580,6 @@ export default function ProductDetailPage() {
                 </button>
               </div>
 
-              {/* Add to cart */}
               <button
                 type="button"
                 className="flex-1 px-6 py-3 rounded-full bg-[#3A643B] text-white text-sm font-semibold"
@@ -486,7 +588,6 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            {/* description */}
             <div className="text-sm leading-relaxed text-[#555] space-y-2">
               {product.description.map((para, idx) => (
                 <p key={idx}>{para}</p>
@@ -496,10 +597,9 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* PRODUCT HIGHLIGHTS */}
+      {/* ========== PRODUCT HIGHLIGHTS (right side from middle) ========== */}
       <section className="bg-[#FFF7E2] pb-12 lg:pb-16">
-        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-[1.1fr,1fr]">
-          {/* left column kept empty to align right side from the middle */}
+        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2">
           <div className="hidden lg:block" />
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -525,7 +625,7 @@ export default function ProductDetailPage() {
 
       {/* KEY INGREDIENTS */}
       <section className="bg-[#FFF7E2] pb-12 lg:pb-16">
-        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-[1.1fr,1fr]">
+        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2">
           <div className="hidden lg:block" />
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -562,12 +662,11 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* HOW TO USE / GENERAL INSTRUCTIONS / FAQ / WHY CHOOSE / TRUST THE VOICE */}
+      {/* HOW TO USE / GENERAL / FAQ / TRUST THE VOICE */}
       <section className="bg-[#FFF7E2] pb-12 lg:pb-16">
-        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-[1.1fr,1fr]">
+        <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2">
           <div className="hidden lg:block" />
           <div className="space-y-8">
-            {/* How to use */}
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-[#222222]">
                 How to use
@@ -579,7 +678,6 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* General Instructions */}
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-[#222222]">
                 General Instructions
@@ -590,7 +688,6 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Commonly Asked Questions */}
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-[#222222]">
                 Commonly Asked Questions
@@ -616,21 +713,19 @@ export default function ProductDetailPage() {
                     Amrutam&apos;s Child Care Malt helps improve immunity and is
                     useful in enhancing vitality and vigor in children. This
                     100% natural Ayurvedic jam is extremely effective in
-                    fighting chronic diseases. Giving your little one Amrutam&apos;s
-                    Child Care Malt daily will help them improve their appetite
-                    and digestion.
+                    fighting chronic diseases. Giving your little one
+                    Amrutam&apos;s Child Care Malt daily will help them improve
+                    their appetite and digestion.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Trust the voice – video placeholder */}
             <div className="space-y-3">
               <h3 className="text-lg font-semibold text-[#222222]">
                 Trust the voice
               </h3>
               <div className="rounded-[24px] overflow-hidden bg-[#FDEAD2]">
-                {/* simple placeholder – you can replace with actual video/embed */}
                 <div className="w-full h-[260px] md:h-[320px] flex items-center justify-center text-sm text-[#555555]">
                   Video placeholder
                 </div>
@@ -647,7 +742,6 @@ export default function ProductDetailPage() {
             Reviews and Ratings
           </h2>
 
-          {/* top row: rating summary + buttons */}
           <div className="mt-8 flex flex-col md:flex-row items-center md:items-stretch justify-between gap-6">
             <div className="w-full md:w-[320px] rounded-[24px] bg-[#FDEAD2] px-6 py-6 flex flex-col justify-center">
               <div className="flex items-baseline gap-2">
@@ -663,68 +757,39 @@ export default function ProductDetailPage() {
                   ))}
                 </div>
               </div>
-              <p className="mt-2 text-xs text-[#555555]">
-                Based on 20 reviews
-              </p>
+              <p className="mt-2 text-xs text-[#555555]">Based on 20 reviews</p>
             </div>
 
-                  <div className="flex gap-4 justify-center md:justify-end">
-        {/* See More Reviews */}
-        <button
-          type="button"
-          className="
-            px-8 py-3 
-            rounded-[18px]
-            bg-[#FFF7E2]
-            border border-[#F3DEC5]
-            shadow-[0_6px_14px_rgba(0,0,0,0.05)]
-            text-sm font-medium text-[#275A3A]
-            transition-transform duration-150
-            hover:-translate-y-[2px]
-          "
-        >
-          See More Reviews
-        </button>
-
-        {/* Write a review */}
-        <button
-          type="button"
-          className="
-            px-8 py-3 
-            rounded-[18px]
-            bg-[#FFF7E2]
-            border border-[#F3DEC5]
-            shadow-[0_6px_14px_rgba(0,0,0,0.05)]
-            text-sm font-medium text-[#275A3A]
-            transition-transform duration-150
-            hover:-translate-y-[2px]
-          "
-        >
-          Write a review
-        </button>
-      </div>
-
+            <div className="flex gap-4 justify-center md:justify-end">
+              <button
+                type="button"
+                className="px-8 py-3 rounded-[18px] bg-[#FFF7E2] border border-[#F3DEC5] shadow-[0_6px_14px_rgba(0,0,0,0.05)] text-sm font-medium text-[#275A3A] transition-transform duration-150 hover:-translate-y-[2px]"
+              >
+                See More Reviews
+              </button>
+              <button
+                type="button"
+                className="px-8 py-3 rounded-[18px] bg-[#FFF7E2] border border-[#F3DEC5] shadow-[0_6px_14px_rgba(0,0,0,0.05)] text-sm font-medium text-[#275A3A] transition-transform duration-150 hover:-translate-y-[2px]"
+              >
+                Write a review
+              </button>
+            </div>
           </div>
 
-          {/* review cards */}
           <div className="mt-8 space-y-4">
             {REVIEWS.map((review) => (
               <div
                 key={review.id}
                 className="rounded-[24px] bg-[#FDEAD2] px-6 py-5 flex flex-col md:flex-row items-start gap-4"
               >
-                {/* avatar */}
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-sm font-semibold text-[#222222]">
                     {review.initials}
                   </div>
                 </div>
 
-                {/* text */}
                 <div className="flex-1">
-                  <p className="text-sm text-[#222222]">
-                    {review.text}
-                  </p>
+                  <p className="text-sm text-[#222222]">{review.text}</p>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-[#555555]">
                     <span>{review.name}</span>
                     <span className="text-[10px]">•</span>
@@ -746,7 +811,7 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* PEOPLE HAS ALSO BOUGHT */}
+      {/* PEOPLE HAS ALSO BOUGHT + EXPERTS */}
       <section className="bg-[#FFF7E2] pb-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-center text-2xl md:text-3xl font-semibold text-[#222222]">
@@ -759,7 +824,6 @@ export default function ProductDetailPage() {
                 key={item.id}
                 className="bg-white rounded-[32px] shadow-md overflow-hidden flex flex-col"
               >
-                {/* Image */}
                 <div className="w-full">
                   <img
                     src={item.image}
@@ -768,20 +832,17 @@ export default function ProductDetailPage() {
                   />
                 </div>
 
-                {/* Text content */}
                 <div className="px-6 pt-5 pb-6 flex flex-col flex-1">
                   <h3 className="text-[16px] md:text-[18px] font-medium text-[#222222] leading-snug text-center">
                     {item.title}
                   </h3>
 
-                  {/* price + size */}
                   <p className="mt-3 text-sm text-[#555555] text-center">
                     <span className="font-semibold">{item.price}</span>
                     <span className="mx-1">•</span>
                     <span>{item.size}</span>
                   </p>
 
-                  {/* Stars + count + plus */}
                   <div className="mt-3 flex items-center gap-2">
                     <div className="flex items-center text-[#F5A623]">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -794,9 +855,7 @@ export default function ProductDetailPage() {
                     <span className="text-xs text-[#777777]">
                       ({item.reviews})
                     </span>
-
                     <div className="flex-1" />
-
                     <button
                       type="button"
                       className="w-9 h-9 rounded-full bg-[#3A643B] flex items-center justify-center"
@@ -811,7 +870,6 @@ export default function ProductDetailPage() {
         </div>
 
         <ExpertsSection />
-
       </section>
     </div>
   );
