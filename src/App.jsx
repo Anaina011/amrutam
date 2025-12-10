@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import StorePage from "./pages/StorePage.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import IngredientDetailPage from "./pages/IngredientDetailPage";
 
 const Placeholder = ({ title }) => (
   <div className="max-w-6xl mx-auto px-4 py-16">
@@ -23,7 +24,8 @@ export default function App() {
           <Route path="/shop" element={<StorePage />} />
           <Route path="/forum" element={<Placeholder title="Forum" />} />
           <Route path="/about" element={<Placeholder title="About Us" />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} /> {/* NEW */}
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/ingredient/:slug" element={<IngredientDetailPage />} />
         </Routes>
       </main>
     </div>
