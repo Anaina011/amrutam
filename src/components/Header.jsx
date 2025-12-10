@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <header className="w-full">
-      {/* TOP DARK STRIP – DESKTOP/TABLET ONLY */}
+      {/* TOP DARK STRIP*/}
       <div className="hidden md:block bg-[#333333] text-white text-xs sm:text-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
           <p>Your first 5 minutes instant call is free.</p>
@@ -37,12 +37,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ---------- DESKTOP / TABLET HEADER (md and up) ---------- */}
+      {/* ---------- HEADER  ---------- */}
       <div className="hidden md:block bg-[#FFF7E2] border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 pt-4 pb-3 flex flex-col gap-3">
-          {/* ROW 1 */}
           <div className="flex items-center justify-between w-full py-2">
-            {/* Left: phone */}
             <a
               href="tel:+919826353231"
               className="flex items-center gap-2 text-[18px] text-[#2D7A39]"
@@ -51,7 +49,6 @@ export default function Header() {
               <span>+91 9826353231</span>
             </a>
 
-            {/* Logo */}
             <Link to="/" className="flex-1 flex justify-center">
               <img
                 src={logoImg}
@@ -60,16 +57,13 @@ export default function Header() {
               />
             </Link>
 
-            {/* Right: balance spacer */}
             <div className="w-[120px]" />
           </div>
 
-          {/* ROW 2 */}
           <div className="flex items-center justify-between w-full">
-            {/* Left spacer (keeps nav centered) */}
+
             <div className="w-[120px]" />
 
-            {/* Center: nav menu – slightly smaller on md screens */}
             <nav className="flex items-center gap-6 lg:gap-10 text-[16px] lg:text-[18px] font-semibold">
               {navItems.map((item) => (
                 <NavLink
@@ -87,9 +81,7 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Right icons */}
             <div className="flex items-center gap-3">
-              {/* Wallet */}
               <button className="relative w-10 h-10 rounded-full bg-[#E3EFE6] flex items-center justify-center">
                 <FiCreditCard className="w-5 h-5 text-[#3A643B]" />
                 <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-[#3A643B] text-[10px] text-white flex items-center justify-center px-1">
@@ -97,7 +89,6 @@ export default function Header() {
                 </span>
               </button>
 
-              {/* Cart */}
               <button className="relative w-10 h-10 rounded-full bg-[#E3EFE6] flex items-center justify-center">
                 <FiShoppingCart className="w-5 h-5 text-[#3A643B]" />
                 <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-[#3A643B] text-[10px] text-white flex items-center justify-center px-1">
@@ -105,17 +96,14 @@ export default function Header() {
                 </span>
               </button>
 
-              {/* Bell */}
               <button className="w-10 h-10 rounded-full bg-[#E3EFE6] flex items-center justify-center">
                 <FiBell className="w-5 h-5 text-[#3A643B]" />
               </button>
 
-              {/* Users */}
               <button className="w-10 h-10 rounded-full bg-[#E3EFE6] flex items-center justify-center">
                 <FiUsers className="w-5 h-5 text-[#3A643B]" />
               </button>
 
-              {/* Arrow */}
               <button>
                 <FiChevronDown className="w-6 h-6 text-[#3A643B]" />
               </button>
@@ -124,7 +112,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ---------- MOBILE HEADER (< md) ---------- */}
+      {/* ---------- MOBILE HEADER ---------- */}
       <div className="md:hidden bg-[#FFF7E2] border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Left: hamburger */}
@@ -145,7 +133,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Right: icons + login */}
           <div className="flex items-center gap-2">
             <button className="w-9 h-9 rounded-full bg-[#E3EFE6] flex items-center justify-center">
               <FiCreditCard className="w-4 h-4 text-[#3A643B]" />
@@ -159,7 +146,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
         {mobileOpen && (
           <nav className="border-t border-slate-200 bg-[#FFF7E2]">
             <ul className="flex flex-col px-4 py-2 gap-2">

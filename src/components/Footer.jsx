@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import {
   FaFacebookF,
   FaInstagram,
@@ -12,7 +11,6 @@ export default function Footer() {
   return (
     <footer className="bg-[#E3EFE6]">
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-16 lg:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr_1.2fr] items-start">
-        {/* LEFT – contact info */}
         <div>
           <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
             Get in touch
@@ -30,7 +28,6 @@ export default function Footer() {
             <p>+91 9713171999</p>
           </div>
 
-          {/* social icons */}
           <div className="mt-6 flex flex-wrap gap-3">
             {[FaFacebookF, FaInstagram, FaYoutube, FaTwitter, FaLinkedinIn, FaWhatsapp].map(
               (Icon, idx) => (
@@ -45,7 +42,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* MIDDLE – information links */}
         <div>
           <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
             Information
@@ -62,7 +58,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* RIGHT – newsletter */}
         <div>
           <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
             Subscribe to our Newsletter and join
@@ -70,7 +65,6 @@ export default function Footer() {
             Amrutam Family today!
           </h3>
 
-          {/* email input + button */}
           <form
             onSubmit={(e) => e.preventDefault()}
             className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"

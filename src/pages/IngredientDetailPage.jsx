@@ -1,4 +1,3 @@
-// src/pages/IngredientDetailPage.jsx
 import { Link, useParams } from "react-router-dom";
 import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
@@ -56,27 +55,22 @@ const INGREDIENT_PRODUCTS = {
 export default function IngredientDetailPage() {
   const { slug } = useParams();
 
-// Make a pretty version of the slug for display, e.g. "shatavari" -> "Shatavari"
 const prettyName =
   slug && slug.length
     ? slug.charAt(0).toUpperCase() + slug.slice(1).toLowerCase()
     : "Gokhru";
 
-// Always use Gokhru's data for image + description
 const gokhruData = INGREDIENTS.gokhru;
 
-// If slug is "gokhru" -> show full gokhru data
-// Otherwise -> same data but with only the name changed
 const ingredient =
   slug === "gokhru"
     ? gokhruData
     : {
         ...gokhruData,
         slug,
-        name: prettyName, // only name is different
+        name: prettyName, 
       };
 
-// For now, always show Gokhru-related products
 const products = INGREDIENT_PRODUCTS.gokhru || [];
 
 
@@ -94,7 +88,6 @@ const products = INGREDIENT_PRODUCTS.gokhru || [];
 
         {/* MAIN 2-COLUMN LAYOUT */}
         <div className="mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2 items-start">
-          {/* LEFT: ingredient image + text */}
           <div className="flex flex-col items-start">
             {/* image card */}
             <div className="w-[260px] h-[260px] rounded-[24px] bg-white overflow-hidden flex items-center justify-center shadow-[0_10px_24px_rgba(0,0,0,0.06)]">

@@ -1,4 +1,3 @@
-// src/pages/ProductDetailPage.jsx
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -608,7 +607,7 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* KEY INGREDIENTS (RIGHT SIDE) */}
+      {/* KEY INGREDIENTS */}
       <section className="bg-[#FFF7E2] pb-12 lg:pb-16">
         <div className="max-w-6xl mx-auto px-4 lg:grid lg:grid-cols-2">
           <div className="lg:col-start-2">
@@ -650,7 +649,7 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
-      {/* HOW TO USE / GENERAL / FAQ / TRUST */}
+      {/* HOW TO USE */}
       <section className="bg-[#FFF7E2] pb-12 lg:pb-16">
         <div className="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2">
           <div className="hidden lg:block" />
@@ -861,7 +860,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Experts right after also-bought */}
         <ExpertsSection />
       </section>
 

@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx";
 import StorePage from "./pages/StorePage.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import IngredientDetailPage from "./pages/IngredientDetailPage";
+import ForumPage from "./pages/ForumPage";
 
 const Placeholder = ({ title }) => (
   <div className="max-w-6xl mx-auto px-4 py-16">
@@ -22,10 +23,11 @@ export default function App() {
           <Route path="/find-doctors" element={<Placeholder title="Find Doctors" />} />
           <Route path="/lab-tests" element={<Placeholder title="Lab Tests" />} />
           <Route path="/shop" element={<StorePage />} />
-          <Route path="/forum" element={<Placeholder title="Forum" />} />
+
           <Route path="/about" element={<Placeholder title="About Us" />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/ingredient/:slug" element={<IngredientDetailPage />} />
+          <Route path="/forum" element={<ForumPage />} />
         </Routes>
       </main>
     </div>

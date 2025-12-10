@@ -1,4 +1,3 @@
-// src/components/DownloadAppSection.jsx
 import { FiMessageCircle } from "react-icons/fi";
 
 import googlePlayBadge from "../assets/google-play-badge.png";
@@ -9,7 +8,6 @@ export default function DownloadAppSection() {
   return (
     <section className="bg-[#FFF7E2]">
       <div className="max-w-6xl mx-auto px-4 py-16 lg:py-20 grid gap-10 lg:grid-cols-2 items-center">
-        {/* LEFT: heading, text, features, store badges */}
         <div>
           <h2 className="text-3xl sm:text-4xl font-semibold text-[#275A3A] leading-tight">
             Download Amrutam Ayurveda
@@ -17,14 +15,13 @@ export default function DownloadAppSection() {
             App Now
           </h2>
 
-          {/* Smaller width for paragraph */}
           <p className="mt-4 text-base text-[#555555] max-w-md leading-relaxed">
             The Amrutam Ayurveda App is your one-stop app for all things
             Ayurveda! Apart from mimicking the website, the app has added
             benefits
           </p>
 
-          {/* Feature cards */}
+
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
               "Access To Prescriptions",
@@ -46,7 +43,6 @@ export default function DownloadAppSection() {
             ))}
           </div>
 
-          {/* Store badges as IMAGES */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <img
               src={googlePlayBadge}
@@ -61,7 +57,6 @@ export default function DownloadAppSection() {
           </div>
         </div>
 
-        {/* RIGHT: single composite image */}
         <div className="flex justify-center lg:justify-end">
           <img
             src={appPromoImg}

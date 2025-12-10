@@ -45,7 +45,6 @@ const CATEGORIES = [
   { id: "More", label: "More", icon: <FiArrowRight className="w-6 h-6 text-[#3A643B]" /> },
 ];
 
-// Product data (includes duplicate Herbal Shampoo as 4th card)
 const PRODUCTS = [
   {
     id: 1,
@@ -92,16 +91,13 @@ const PRODUCTS = [
   },
 ];
 
-// 🔹 Reusable section for a 3-card carousel + arrow
 function ProductCarouselSection({ title, products }) {
   const [startIndex, setStartIndex] = useState(0);
 
-  // Reset when products change (e.g. filter changed)
   useEffect(() => {
     setStartIndex(0);
   }, [products]);
 
-  // Always show 3 products with wrap-around
   const visibleProducts = [];
   for (let i = 0; i < 3; i++) {
     if (products.length === 0) break;
@@ -117,14 +113,11 @@ function ProductCarouselSection({ title, products }) {
   return (
     <section className="bg-[#FFF7E2]">
       <div className="max-w-6xl mx-auto px-4 py-10">
-        {/* Title */}
         <h2 className="text-2xl sm:text-3xl font-semibold text-[#222222] mb-6">
           {title}
         </h2>
 
-        {/* Cards + arrow */}
         <div className="flex items-center gap-6">
-          {/* Cards */}
        <div className="flex-1 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
   {visibleProducts.map((product) => (
     <Link
@@ -150,7 +143,6 @@ function ProductCarouselSection({ title, products }) {
             {product.price} • {product.size}
           </p>
 
-          {/* Stars centered + plus on right */}
           <div className="mt-3 flex items-center">
             <div className="flex items-center gap-1 text-[#F5A623] mx-auto">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -182,7 +174,6 @@ function ProductCarouselSection({ title, products }) {
 </div>
 
 
-          {/* Arrow (desktop / tablet) */}
           <button
             onClick={handleNext}
             className="hidden md:flex items-center justify-center w-14 h-14 rounded-full bg-white border border-[#ECECEC] shadow-sm"
@@ -191,7 +182,6 @@ function ProductCarouselSection({ title, products }) {
           </button>
         </div>
 
-        {/* Arrow for mobile */}
         <div className="mt-6 flex md:hidden justify-center">
           <button
             onClick={handleNext}
@@ -208,7 +198,6 @@ function ProductCarouselSection({ title, products }) {
 export default function StorePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // Filter products once, send to both sections
   const filteredProducts =
     selectedCategory === "All"
       ? PRODUCTS
@@ -216,20 +205,17 @@ export default function StorePage() {
 
   return (
     <div className="min-h-screen bg-[#FFF7E2]">
-      {/* HERO / SEARCH SECTION */}
       <section
         className="relative bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${storeBg})` }}
       >
         <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14 lg:py-16">
-          {/* Title */}
           <h1 className="text-center text-3xl sm:text-4xl font-semibold text-[#2F3443] mb-8">
             Store
           </h1>
 
-          {/* Search Bar + Bag */}
           <div className="flex items-center justify-center gap-4">
-            {/* Search Input */}
+
             <div className="flex-1 max-w-3xl">
               <div className="flex items-center gap-3 bg-white rounded-[14px] shadow-md px-4 sm:px-6 py-4">
                 <FiSearch className="text-xl text-[#757575]" />
@@ -241,13 +227,11 @@ export default function StorePage() {
               </div>
             </div>
 
-            {/* Bag Icon (Desktop) */}
             <button className="hidden sm:flex items-center justify-center w-11 h-11 rounded-[14px] bg-white shadow-md border border-[#F2F2F2]">
               <FiShoppingBag className="text-xl text-[#222222]" />
             </button>
           </div>
 
-          {/* Bag Icon (Mobile) */}
           <div className="mt-4 flex justify-center sm:hidden">
             <button className="flex items-center justify-center w-11 h-11 rounded-[14px] bg-white shadow-md border border-[#F2F2F2]">
               <FiShoppingBag className="text-xl text-[#222222]" />
@@ -256,7 +240,6 @@ export default function StorePage() {
         </div>
       </section>
 
-      {/* CATEGORY FILTER BAR */}
       <section className="bg-[#FFF7E2]">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-center gap-6 overflow-x-auto pb-2">
@@ -286,23 +269,18 @@ export default function StorePage() {
         </div>
       </section>
 
-      {/* FIRST card section */}
       <ProductCarouselSection
         title="Summer Collection"
         products={filteredProducts}
       />
 
-      {/* SECOND card section */}
       <ProductCarouselSection
         title="Summer Collection"
         products={filteredProducts}
       />
 
-      {/* DOWNLOAD APP SECTION */}
       <section className="bg-[#FFF7E2]">
         <div className="max-w-6xl mx-auto px-4 py-16 lg:py-20 grid gap-10 lg:grid-cols-2 items-center">
-          {/* LEFT: heading, text, features, store badges */}
-          {/* LEFT: heading, text, features, store badges */}
           <div>
             <h2 className="text-3xl sm:text-4xl font-semibold text-[#275A3A] leading-tight">
               Download Amrutam Ayurveda
@@ -310,13 +288,11 @@ export default function StorePage() {
               App Now
             </h2>
 
-            {/* Smaller width for paragraph */}
             <p className="mt-4 text-base text-[#555555] max-w-md leading-relaxed">
               The Amrutam Ayurveda App is your one-stop app for all things Ayurveda!
               Apart from mimicking the website, the app has added benefits
             </p>
 
-            {/* Feature cards */}
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {[
                 "Access To Prescriptions",
@@ -338,7 +314,6 @@ export default function StorePage() {
               ))}
             </div>
 
-            {/* Store badges as IMAGES */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <img
                 src={googlePlayBadge}
@@ -354,7 +329,6 @@ export default function StorePage() {
           </div>
 
 
-          {/* RIGHT: single composite image */}
           <div className="flex justify-center lg:justify-end">
             <img
               src={appPromoImg}
@@ -364,12 +338,9 @@ export default function StorePage() {
           </div>
         </div>
       </section>
-
-            {/* FOOTER SECTION */}
       <footer className="bg-[#E3EFE6]">
         <div className="max-w-6xl mx-auto px-4 py-12 md:py-16 lg:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr_1.2fr] items-start">
 
-          {/* LEFT – contact info */}
           <div>
             <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
               Get in touch
@@ -385,7 +356,6 @@ export default function StorePage() {
               <p>+91 9713171999</p>
             </div>
 
-            {/* social icons */}
             <div className="mt-6 flex flex-wrap gap-3">
               {[
                 FaFacebookF,
@@ -405,7 +375,6 @@ export default function StorePage() {
             </div>
           </div>
 
-          {/* MIDDLE – information links */}
           <div>
             <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
               Information
@@ -422,7 +391,6 @@ export default function StorePage() {
             </ul>
           </div>
 
-          {/* RIGHT – newsletter */}
           <div>
             <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#275A3A]">
               Subscribe to our Newsletter and join
@@ -430,7 +398,6 @@ export default function StorePage() {
               Amrutam Family today!
             </h3>
 
-            {/* email input + button */}
             <form
               onSubmit={(e) => e.preventDefault()}
               className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
